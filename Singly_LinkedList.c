@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <conio.h>
 
-typedef struct FIFO_List
+typedef struct S_Linked_List
 {
     int value;
-    struct FIFO_List *next;
+    struct S_Linked_List *next;
 } NODE;
 
 // Global  declaration
@@ -25,6 +25,7 @@ void delete_from_end();
 void delete_from_middle();
 void Delete();
 void Search();
+void Bubble_sort();
 void Reverse_list();
 
 int main()
@@ -41,8 +42,9 @@ int main()
         printf("\nPress 2 to INSERT a number to the list...");
         printf("\nPress 3 to DELETE any node from the list....");
         printf("\nPress 4 to SEARCH a no from the list...");
-        printf("\nPress 5 to REVERSE the list...");
-        printf("\nPress 6 to EXIT the program...");
+        printf("\nPress 5 to SORT the list...");
+        printf("\nPress 6 to REVERSE the list...");
+        printf("\nPress 7 to EXIT the program...");
 
         scanf("\n%d", &ch);
         switch (ch)
@@ -64,10 +66,14 @@ int main()
             break;
 
         case 5:
-            Reverse_list();
+            Bubble_sort();
             break;
 
         case 6:
+            Reverse_list();
+            break;
+
+        case 7:
             exit(1);
         default:
             printf("\nYou entered wrong choice!!!");
@@ -419,4 +425,26 @@ void Reverse_list()
         prev->next = sprev;
     }
     start = prev;
+}
+
+void Bubble_sort()
+{
+    NODE *current = start, *cur = NULL;
+    int t;
+
+    while (current != NULL)
+    {
+        cur = current->next;
+        while (cur != NULL)
+        {
+            if (current->value > cur->value)
+            {
+                t = current->value;
+                current->value = cur->value;
+                cur->value = t;
+            }
+            cur = cur->next;
+        }
+        current = current->next;
+    }
 }
