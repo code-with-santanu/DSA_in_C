@@ -20,6 +20,7 @@ STACKNODE *create_node();
 void Push();
 void Pop();
 void Display();
+void Delete_stk();
 
 int main()
 {
@@ -32,6 +33,7 @@ int main()
         printf("\nPress 1 to PUSH element into the stack...");
         printf("\nPress 2 to POP from the stack...");
         printf("\nPress 3 to DISPLAY the  stack...");
+        printf("\nPress 4 to DELETE the whole stack...");
 
         printf("\nEnter the choice: ");
         scanf("%d", &ch);
@@ -48,6 +50,10 @@ int main()
 
         case 3:
             Display();
+            break;
+
+        case 4:
+            Delete_stk();
             break;
 
         default:
@@ -122,4 +128,10 @@ void Display()
         printf("\n%d", head->value);
         head = head->next;
     }
+}
+
+void Delete_stk()
+{
+    free(top);
+    exit(0);
 }
