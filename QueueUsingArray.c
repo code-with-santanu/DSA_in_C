@@ -5,7 +5,7 @@
 #include <conio.h>
 
 /* ======== GLOBAL  DECLARATION ======== */
-int *QUE, front = -1, rear = -1, size;
+int *QUE, front = 0, rear = -1, size;
 
 /* =============== PROTOTYPE DECLERATION ===============*/
 
@@ -69,6 +69,11 @@ void create_queue()
 
 void Display()
 {
+    if (rear == -1)
+    {
+        printf("\nQUEUE IS EMPTY!!!");
+        return;
+    }
     int *p = QUE + front, i;
 
     for (i = front; i <= rear; i++)
@@ -84,7 +89,8 @@ void Display()
 }
 void Insert()
 {
-    int *p = NULL, i;
+    // int *p = NULL, i;    /* For using pointer */
+    int n;
 
     if (rear == size - 1)
     {
@@ -92,49 +98,47 @@ void Insert()
         return;
     }
 
-    if (rear == -1) // Indicates the queue is empty
-    {
-        front++; // assign the front value to 0
-    }
+    // if (rear == -1) // Indicates the queue is empty
+    // {
+    //     front++; // assign the front value to 0
+    // }
 
-    rear++;
-    p = QUE + front;
-    for (i = front; i < rear; i++)
-    {
-        p++;
-    }
+    // rear++;
+    // p = QUE + front;
+    // for (i = front; i < rear; i++)
+    // {
+    //     p++;
+    // }
 
     printf("\nEnter the no to insert: ");
-    scanf("%d", p);
+    scanf("%d", &n);
 
-    // Que[rear++]=no;     /*  insert using indexing method */
+    QUE[++rear] = n; /*  insert using indexing method */
 }
 
 void Delete()
 {
     int value;
 
-    if (front == -1)
+    if (rear == -1)
     {
         printf("\nQUEUE UNDERFLOW!!!");
         return;
     }
 
-    if (front == rear) // Indicates that the queue has no ele, the front and rear reaches the end of array
-    {
-        front = rear = -1; // set the front and rear position to the initial condition
-    }
-    else
-    {
-        printf("\nThe Poppe value is: %d", QUE[front]);
+    // if (front == rear) // Indicates that the queue has no ele, the front and rear reaches the end of array
+    // {
+    //     front = rear = -1; // set the front and rear position to the initial condition
+    // }
 
-        // front++; // Shifting the front towards
+    printf("\nThe Deleted value is: %d", QUE[front]);
 
-        /* another process for deletion */
-        for (int i = front; i < rear; i++)
-        {
-            QUE[i] = QUE[i + 1];
-        }
-        rear--;
+    // front++; // Shifting the front towards
+
+    /* another process for deletion */
+    for (int i = front; i < rear; i++)
+    {
+        QUE[i] = QUE[i + 1];
     }
+    rear--;
 }
