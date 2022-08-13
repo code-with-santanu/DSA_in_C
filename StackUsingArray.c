@@ -79,23 +79,23 @@ void Display()
 
 void Push()
 {
-	int *p = stk, i;
-
+	// int *p = stk, i;		/* For using pointer */
+	int n;
 	if (top == size - 1)
 	{
 		printf("\nSTACK OVERFLOW!!!");
 	}
 	else
 	{
-		for (i = 0; i <= top; i++)
-		{
-			p++;
-		}
+		// for (i = 0; i <= top; i++)
+		// {
+		// 	p++;
+		// }
 		printf("\nEnter a no: ");
-		scanf("%d", p);
-		top++;
+		scanf("%d", &n); // scanf("%d",p)
+		// top++;
 
-		/*stk[++top] = n; //pushing the value using indexing method */
+		stk[++top] = n; /* pushing the value using indexing method */
 	}
 }
 
