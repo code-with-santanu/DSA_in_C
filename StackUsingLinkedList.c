@@ -16,7 +16,7 @@ STACKNODE *top = NULL;
 
 /* =============== PROTOTYPE DECLERATION ===============*/
 
-STACKNODE *create_node();
+STACKNODE *create_node(int);
 void Push();
 void Pop();
 void Display();

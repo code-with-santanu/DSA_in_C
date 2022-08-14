@@ -16,7 +16,7 @@ QUEUENODE *front = NULL, *rear = NULL;
 
 /* =============== PROTOTYPE DECLERATION ===============*/
 
-QUEUENODE *create_node();
+QUEUENODE *create_node(int);
 void Insert();
 void Delete();
 void Display();
