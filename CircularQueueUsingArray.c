@@ -76,14 +76,12 @@ void Display()
         printf("\nQUEUE IS EMPTY!!!");
         return;
     }
-    else
+
+    x = front;
+    for (i = 1; i <= count; i++)
     {
-        x = front;
-        for (i = 1; i <= count; i++)
-        {
-            printf("%d\t", QUE[x]);
-            x = (x + 1) % size;
-        }
+        printf("%d\t", QUE[x]);
+        x = (x + 1) % size;
     }
 }
 
@@ -96,30 +94,24 @@ void Insert()
         printf("\nQUEUE  OVERFLOW!!!");
         return;
     }
-    else
-    {
-        printf("\nEnter a no to insert: ");
-        scanf("%d", &n);
 
-        rear = (rear + 1) % size;
-        QUE[rear] = n;
-        count++;
-    }
+    printf("\nEnter a no to insert: ");
+    scanf("%d", &n);
+
+    rear = (rear + 1) % size;
+    QUE[rear] = n;
+    count++;
 }
 
 void Delete()
 {
-    int n;
-
     if (count == 0)
     {
         printf("\nQUEUE  UNDERFLOW!!!");
         return;
     }
-    else
-    {
-        printf("\nThe deleted element is: %d", QUE[front]);
-        front = (front + 1) % size;
-        count--;
-    }
+
+    printf("\nThe deleted element is: %d", QUE[front]);
+    front = (front + 1) % size;
+    count--;
 }

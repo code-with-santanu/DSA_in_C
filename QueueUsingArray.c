@@ -118,8 +118,6 @@ void Insert()
 
 void Delete()
 {
-    int value;
-
     if (rear == -1)
     {
         printf("\nQUEUE UNDERFLOW!!!");
