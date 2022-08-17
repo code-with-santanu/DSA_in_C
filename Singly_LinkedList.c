@@ -107,7 +107,7 @@ void create_list()
 {
     NODE *temp, *current;
     current = temp = NULL;
-    int n, b_num;
+    int n;
     char choice;
 
     do
@@ -292,19 +292,24 @@ void Insert()
 
 void delete_from_begin()
 {
+    NODE *temp = start;
     start = start->next;
+
+    free(temp);
 }
 
 void delete_from_end()
 {
-    NODE *current;
+    NODE *current, *temp = NULL;
     current = start;
 
     while (current != NULL)
     {
         if (current->next->next == NULL)
         {
+            temp = current->next;
             current->next = NULL;
+            free(temp);
             break;
         }
         current = current->next;
@@ -313,7 +318,7 @@ void delete_from_end()
 
 void delete_from_middle()
 {
-    NODE *current = NULL;
+    NODE *current = NULL, *temp = NULL;
     int no, found = 0;
 
     printf("\nEnter a no want to delete: ");
@@ -324,7 +329,9 @@ void delete_from_middle()
     {
         if (current->next->value == no)
         {
+            temp = current->next;
             current->next = current->next->next;
+            free(temp);
             found = 1;
             break;
         }
