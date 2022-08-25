@@ -406,7 +406,6 @@ void Search()
         {
             check = 1;
             printf("\nData found at position %d and it's stored at address %d", count, current->next);
-            break;
         }
         current = current->next;
         count++;
