@@ -8,8 +8,9 @@ typedef struct polynominal
     struct polynominal *next;
 } P_node;
 
-P_node *poly;
+P_node *poly; // Global  declaration
 
+/* =============== PROTOTYPE DECLERATION ===============*/
 P_node *create_node(int, int);
 void create_poly_func();
 void Insert_node();
@@ -23,6 +24,7 @@ int main()
     return 0;
 }
 
+/* =============== FUNCTION  DEFINITIONS =============== */
 P_node *create_node(int co, int ex)
 {
     P_node *temp;
