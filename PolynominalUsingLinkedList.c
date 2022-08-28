@@ -3,54 +3,59 @@
 
 typedef struct polynominal
 {
-    int coef;
+    int co;
     int exp;
     struct polynominal *next;
-} P_node;
-
-P_node *poly; // Global  declaration
+} Poly;
 
 /* =============== PROTOTYPE DECLERATION ===============*/
-P_node *create_node(int, int);
-void create_poly_func();
-void Insert_node();
-void Print_func();
+Poly *create_node(int, int);
+void Insert_node(Poly **, Poly *);
+void Print_func(Poly **);
 
 int main()
 {
-    create_poly_func();
-    Print_func();
+    int co, exp, n, i;
+    Poly *head = NULL, *temp = NULL;
+
+    printf("\nEnter the no of terms: ");
+    scanf("%d", &n);
+
+    for (i = 1; i <= n; i++)
+    {
+        printf("\nEnter the co-efficient: ");
+        scanf("%d", &co);
+
+        printf("\nEnter the exponent: ");
+        scanf("%d", &exp);
+
+        temp = create_node(co, exp);
+        Insert_node(&head, temp);
+    }
+    Print_func(&head);
 
     return 0;
 }
 
 /* =============== FUNCTION  DEFINITIONS =============== */
-P_node *create_node(int co, int ex)
+Poly *create_node(int co, int exp)
 {
-    P_node *temp;
-    temp = (P_node *)malloc(sizeof(P_node));
-    temp->coef = co;
-    temp->exp = ex;
+    Poly *temp = NULL;
+    temp = (Poly *)malloc(sizeof(Poly));
+    temp->co = co;
+    temp->exp = exp;
     temp->next = NULL;
 
     return temp;
 }
 
-void Insert_node()
+// Inserting the each term to the list
+void Insert_node(Poly **head, Poly *temp)
 {
-    P_node *temp = NULL, *cur = poly;
-    int co, ex;
-
-    printf("\nEnter the coefficient: ");
-    scanf("%d", &co);
-
-    printf("\nEnter the exponent: ");
-    scanf("%d", &ex);
-
-    temp = create_node(co, ex);
-    if (poly == NULL)
+    Poly *cur = *head;
+    if (*head == NULL)
     {
-        poly = temp;
+        *head = temp;
         return;
     }
     while (cur->next != NULL)
@@ -60,27 +65,13 @@ void Insert_node()
     cur->next = temp;
 }
 
-void create_poly_func()
+void Print_func(Poly **head)
 {
-    int i, n;
-
-    printf("\nEnter the no of terms: ");
-    scanf("%d", &n);
-
-    for (i = 1; i <= n; i++)
-    {
-        Insert_node();
-    }
-    return;
-}
-
-void Print_func()
-{
-    P_node *cur = poly;
+    Poly *cur = *head;
 
     while (cur != NULL)
     {
-        printf("(%dx^%d)", cur->coef, cur->exp);
+        printf("(%dx^%d)", cur->co, cur->exp);
         cur = cur->next;
 
         if (cur != NULL)
