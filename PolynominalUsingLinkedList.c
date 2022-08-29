@@ -11,13 +11,14 @@ typedef struct polynominal
 /* =============== PROTOTYPE DECLERATION ===============*/
 Poly *create_node(int, int);
 void Insert_node(Poly **, Poly *);
-void Print_func(Poly **);
+void Print_func(Poly *);
 
 int main()
 {
     int co, exp, n, i;
     Poly *head = NULL, *temp = NULL;
 
+    printf("\nEnter the polynominal...");
     printf("\nEnter the no of terms: ");
     scanf("%d", &n);
 
@@ -32,7 +33,7 @@ int main()
         temp = create_node(co, exp);
         Insert_node(&head, temp);
     }
-    Print_func(&head);
+    Print_func(head);
 
     return 0;
 }
@@ -65,10 +66,8 @@ void Insert_node(Poly **head, Poly *temp)
     cur->next = temp;
 }
 
-void Print_func(Poly **head)
+void Print_func(Poly *cur)
 {
-    Poly *cur = *head;
-
     while (cur != NULL)
     {
         printf("(%dx^%d)", cur->co, cur->exp);
@@ -77,6 +76,10 @@ void Print_func(Poly **head)
         if (cur != NULL)
         {
             printf(" + ");
+        }
+        else
+        {
+            printf("\n");
         }
     }
 }
