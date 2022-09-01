@@ -14,11 +14,12 @@ void create_poly_func(P_node **);
 void Insert_node(P_node **, P_node *);
 void Print_func(P_node *);
 P_node *poly_add(P_node *, P_node *);
+P_node *poly_mult(P_node *, P_node *);
 
 int main()
 {
-    P_node *poly1, *poly2, *poly3;
-    poly1 = poly2 = poly3 = NULL;
+    P_node *poly1, *poly2, *head1, *head2;
+    poly1 = poly2 = head1 = NULL;
 
     printf("\nEnter First Polynominal...");
     create_poly_func(&poly1);
@@ -29,9 +30,13 @@ int main()
     Print_func(poly1);
     Print_func(poly2);
 
-    printf("\nThe resultant polynominal is...");
-    poly3 = poly_add(poly1, poly2);
-    Print_func(poly3);
+    printf("\nThe polynominal after addition...\n");
+    head1 = poly_add(poly1, poly2);
+    Print_func(head1);
+
+    printf("\nThe polynominal after Multiplication...\n");
+    head2 = poly_mult(poly1, poly2);
+    Print_func(head2);
 
     return 0;
 }
@@ -48,19 +53,23 @@ P_node *create_node(int co, int ex)
     return temp;
 }
 
+// Insertion in a sorted order
 void Insert_node(P_node **poly, P_node *temp)
 {
     P_node *cur = *poly;
 
-    if (*poly == NULL)
+    // Here the code is for descending order
+    if (*poly == NULL || (*poly)->exp < temp->exp) // for first two nodes in order
     {
+        temp->next = *poly; // Inserting the node at the beginning
         *poly = temp;
         return;
     }
-    while (cur->next != NULL)
+    while (cur->next != NULL && cur->next->exp > temp->exp) // checking the exp of temp is less or not / sorting wrt exp
     {
         cur = cur->next;
     }
+    temp->next = cur->next;
     cur->next = temp;
 }
 
@@ -146,4 +155,50 @@ P_node *poly_add(P_node *poly1, P_node *poly2)
     }
 
     return head3;
+}
+
+P_node *poly_mult(P_node *poly1, P_node *poly2)
+{
+    P_node *head = NULL, *temp = NULL, *ptr = poly2;
+
+    if (poly1 == NULL || poly2 == NULL)
+    {
+        printf("\nNo Polynominal...");
+    }
+    else
+    {
+        while (poly1 != NULL)
+        {
+            while (ptr != NULL)
+            {
+                temp = create_node((poly1->coef * ptr->coef), (poly1->exp + ptr->exp)); // multiplying the coeff and adding the exponent
+                Insert_node(&head, temp);
+                ptr = ptr->next;
+            }
+            poly1 = poly1->next;
+            ptr = poly2;
+        }
+    }
+
+    // Adding all the nodes having same exponent
+    ptr = head;
+    temp = NULL;
+    while (ptr->next != NULL)
+    {
+        if (ptr->exp == ptr->next->exp)
+        {
+            ptr->coef = ptr->coef + ptr->next->coef; // adding the coef of nodes having equal coef
+
+            temp = ptr->next;
+            ptr->next = ptr->next->next; // deleting the next node having same expo
+            free(temp);
+            temp = NULL;
+        }
+        else
+        {
+            ptr = ptr->next;
+        }
+    }
+
+    return head;
 }
