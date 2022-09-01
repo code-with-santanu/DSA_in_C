@@ -26,7 +26,8 @@ void delete_from_middle();
 void Delete();
 void Search();
 void Bubble_sort();
-void Reverse_list();
+// void Reverse_list();
+void Recursive_reverse(NODE *);
 
 int main()
 {
@@ -70,7 +71,7 @@ int main()
             break;
 
         case 6:
-            Reverse_list(start);
+            Recursive_reverse(start);
             break;
 
         case 7:
@@ -455,7 +456,7 @@ void Bubble_sort()
     }
 }
 
-void Reverse_list(NODE *start)
+void Recursive_reverse(NODE *start)
 {
     if (start == NULL)
     {
