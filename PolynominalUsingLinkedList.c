@@ -50,19 +50,23 @@ Poly *create_node(int co, int exp)
     return temp;
 }
 
-// Inserting the each term to the list
-void Insert_node(Poly **head, Poly *temp)
+// Insertion in a sorted order
+void Insert_node(Poly **poly, Poly *temp)
 {
-    Poly *cur = *head;
-    if (*head == NULL)
+    Poly *cur = *poly;
+
+    // Here the code is for descending order
+    if (*poly == NULL || (*poly)->exp < temp->exp) // for first two nodes in order
     {
-        *head = temp;
+        temp->next = *poly; // Inserting the node at the beginning
+        *poly = temp;
         return;
     }
-    while (cur->next != NULL)
+    while (cur->next != NULL && cur->next->exp > temp->exp) // checking the exp of temp is less or not / sorting wrt exp
     {
         cur = cur->next;
     }
+    temp->next = cur->next;
     cur->next = temp;
 }
 
