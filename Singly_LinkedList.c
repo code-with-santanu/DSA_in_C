@@ -70,7 +70,7 @@ int main()
             break;
 
         case 6:
-            Reverse_list();
+            Reverse_list(start);
             break;
 
         case 7:
@@ -417,21 +417,21 @@ void Search()
     }
 }
 
-void Reverse_list()
-{
-    NODE *current, *prev, *sprev;
-    current = start;
-    prev = sprev = NULL;
+// void Reverse_list()
+// {
+//     NODE *current, *prev, *sprev;
+//     current = start;
+//     prev = sprev = NULL;
 
-    while (current != NULL)
-    {
-        sprev = prev;
-        prev = current;
-        current = current->next;
-        prev->next = sprev;
-    }
-    start = prev;
-}
+//     while (current != NULL)
+//     {
+//         sprev = prev;
+//         prev = current;
+//         current = current->next;
+//         prev->next = sprev;
+//     }
+//     start = prev;
+// }
 
 void Bubble_sort()
 {
@@ -453,4 +453,15 @@ void Bubble_sort()
         }
         current = current->next;
     }
+}
+
+void Reverse_list(NODE *start)
+{
+    if (start == NULL)
+    {
+        return;
+    }
+    Reverse_list(start->next);
+    printf("%d\t", start->value);
+    return;
 }
