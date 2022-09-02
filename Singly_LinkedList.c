@@ -26,8 +26,8 @@ void delete_from_middle();
 void Delete();
 void Search();
 void Bubble_sort();
-// void Reverse_list();
-void Recursive_reverse(NODE *);
+void Reverse_list();
+void Print_reverse(NODE *);
 
 int main()
 {
@@ -71,7 +71,7 @@ int main()
             break;
 
         case 6:
-            Recursive_reverse(start);
+            Reverse_list(start);
             break;
 
         case 7:
@@ -456,13 +456,13 @@ void Bubble_sort()
     }
 }
 
-void Recursive_reverse(NODE *start)
+void Print_reverse(NODE *start)
 {
     if (start == NULL)
     {
         return;
     }
-    Reverse_list(start->next);
+    Print_reverse(start->next);
     printf("%d\t", start->value);
     return;
 }
