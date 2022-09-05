@@ -17,7 +17,7 @@ Stk *create_node(int);
 void Push(int);
 int Pop();
 void Display();
-void BinToDec(Stk **, int);
+void DecToBin(int);
 
 int main()
 {
@@ -26,7 +26,7 @@ int main()
     printf("\nEnter the decimal no: ");
     scanf("%d", &d);
 
-    BinToDec(&s_top, d);
+    DecToBin(d);
     printf("\nThe equivalent binary no of the decimal no is: ");
     Display(s_top);
 
@@ -66,7 +66,16 @@ int Pop()
     return n;
 }
 
-void BinToDec(Stk **top, int d)
+int isEmpty()
+{
+    if (s_top == NULL)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+void DecToBin(int d)
 {
     int r;
     while (d != 0)
@@ -79,6 +88,12 @@ void BinToDec(Stk **top, int d)
 void Display()
 {
     Stk *c = s_top;
+
+    if (isEmpty())
+    {
+        printf("\nSTACK UNDERFLOW!!!");
+        return;
+    }
     while (c != NULL)
     {
         printf("%d", c->value);
