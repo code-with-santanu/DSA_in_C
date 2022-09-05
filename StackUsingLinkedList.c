@@ -11,7 +11,6 @@ typedef struct stack_using_list
 } STACKNODE;
 
 /* ======== GLOBAL  DECLARATION ======== */
-int size;
 STACKNODE *top = NULL;
 
 /* =============== PROTOTYPE DECLERATION ===============*/
