@@ -9,6 +9,8 @@ typedef struct node
     struct node *right;
 }Node;
 
+
+Node *create_node(int );
 void insert(struct node **,int);
 void inorder(struct node *);
 void postorder(struct node *);
@@ -40,17 +42,25 @@ int main()
     return 0;
 }
 
+Node *create_node(int n)
+{
+    Node *temp=NULL;
+    temp=(Node*)malloc(sizeof(Node));
+
+    temp->data=n;
+    temp->left=temp->right=NULL;
+
+    return temp;
+}
 
 void insert(Node **p,int num)
 {
     if((*p)==NULL)
     {
+        Node *temp=NULL;
         printf("Leaf node created.");
-        (*p)=malloc(sizeof(struct node));
-        (*p)->left = NULL;
-
-        (*p)->right = NULL;
-        (*p)->data = num;
+        temp=create_node(num);
+        (*p)=temp;
         return;
     }
     else
