@@ -1,51 +1,51 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<conio.h>
 
 typedef struct node
 {
     struct node *left;
     int data;
     struct node *right;
-}Node;
+}BST;
 
 
-Node *create_node(int );
-void insert(struct node **,int);
-void inorder(struct node *);
-void postorder(struct node *);
-void preorder(struct node *);
+BST *create_node(int );
+void insert(BST **,int);
+void inorder(BST *);
+void postorder(BST *);
+void preorder(BST *);
 
 int main()
 {
-
-    Node *head=NULL;
+    BST *Tree=NULL;
     int no,i,num;
+
     printf("\nProgram for Tree Traversal\n");
-    printf("Enter the number of nodes to add to the tree:<BR>\n");
+
+    printf("\nEnter the number of nodes to add to the tree: ");
     scanf("%d",&no);
+
     for(i=0;i<no;i++)
     {
-    printf("Enter the item:\n");
-    scanf("%d",&num);
-    insert(&head,num);
+        printf("\nEnter the item: ");
+        scanf("%d",&num);
+        insert(&Tree,num);
     }
 
-    //getch();
-    printf("\nINORDER TRAVERSAL\n");
-    inorder(head);
-    printf("\nPREORDER TRAVERSAL\n");
-    preorder(head);
-    printf("\nPOSTORDER TRAVERSAL\n");
-    postorder(head);
+    printf("\nINORDER TRAVERSAL: ");
+    inorder(Tree);
+    printf("\nPREORDER TRAVERSAL: ");
+    preorder(Tree);
+    printf("\nPOSTORDER TRAVERSAL: ");
+    postorder(Tree);
     
     return 0;
 }
 
-Node *create_node(int n)
+BST *create_node(int n)
 {
-    Node *temp=NULL;
-    temp=(Node*)malloc(sizeof(Node));
+    BST *temp=NULL;
+    temp=(BST*)malloc(sizeof(BST));
 
     temp->data=n;
     temp->left=temp->right=NULL;
@@ -53,69 +53,70 @@ Node *create_node(int n)
     return temp;
 }
 
-void insert(Node **p,int num)
+void insert(BST **T,int num)
 {
-    if((*p)==NULL)
+    if((*T)==NULL)
     {
-        Node *temp=NULL;
+        BST *temp=NULL;
         printf("Leaf node created.");
         temp=create_node(num);
-        (*p)=temp;
+        (*T)=temp;
+
         return;
     }
     else
     {
-        if(num==(*p)->data)
+        if(num==(*T)->data)
         {
-            printf("\nREPEATED ENTRY ERROR VALUE REJECTED\n");
+            printf("\nREPEATED ENTRY ERROR VALUE REJECTED!!!\n");
             return;
         }
-        if(num<(*p)->data)
+        if(num<(*T)->data)
         {
             printf("\nDirected to left link.\n");
-            insert(&((*p)->left),num);
+            insert(&((*T)->left),num);
         }
         else
         {
-            printf("Directed to right link.\n");
-            insert(&((*p)->right),num);
+            printf("\nDirected to right link.\n");
+            insert(&((*T)->right),num);
         }
     }
     return;
 }
 
 
-void preorder(Node *p)
+void preorder(BST *T)
 {
-    if(p!=NULL)
+    if(T!=NULL)
     {
-        printf("\nData :%d",p->data);
-        preorder(p->left);
-        preorder(p->right);
+        printf("%d\t",T->data);
+        preorder(T->left);
+        preorder(T->right);
     }
     else
         return;
 }    
     
-void inorder(Node *p)
+void inorder(BST *T)
 {
-    if(p!=NULL)
+    if(T!=NULL)
     {
-        inorder(p->left);
-        printf("\nData :%d",p->data);
-        inorder(p->right);
+        inorder(T->left);
+        printf("%d\t",T->data);
+        inorder(T->right);
     }
     else
         return;
 }
 
-void postorder(Node *p)
+void postorder(BST *T)
 {
-    if(p!=NULL)
+    if(T!=NULL)
     {
-        postorder(p->left);
-        postorder(p->right);
-        printf("\nData :%d",p->data);
+        postorder(T->left);
+        postorder(T->right);
+        printf("%d\t",T->data);
     }
     else
         return;
