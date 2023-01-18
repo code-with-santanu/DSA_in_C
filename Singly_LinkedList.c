@@ -9,7 +9,7 @@ typedef struct S_Linked_List
 } NODE;
 
 // Global  declaration
-NODE *start = NULL;
+NODE *head = NULL;
 
 /* =============== PROTOTYPE DECLERATION ===============*/
 NODE *create_node(int);
@@ -71,7 +71,7 @@ int main()
             break;
 
         case 6:
-            Reverse_list(start);
+            Reverse_list(head);
             break;
 
         case 7:
@@ -117,9 +117,9 @@ void create_list()
         scanf("%d", &n);
         temp = create_node(n);
 
-        if (start == NULL)
+        if (head == NULL)
         {
-            start = current = temp;
+            head = current = temp;
         }
         else
         {
@@ -135,7 +135,7 @@ void create_list()
 
 void Display()
 {
-    NODE *curr = start;
+    NODE *curr = head;
     while (curr != NULL)
     {
         printf("%d\t", curr->value);
@@ -152,8 +152,8 @@ void insert_at_begin()
     scanf("%d", &no);
 
     temp = create_node(no);
-    temp->next = start;
-    start = temp;
+    temp->next = head;
+    head = temp;
 }
 
 void insert_at_end()
@@ -168,7 +168,7 @@ void insert_at_end()
 
     temp = create_node(no);
 
-    current = start;
+    current = head;
     while (current->next != NULL)
     {
         current = current->next;
@@ -188,15 +188,15 @@ void insert_before()
     scanf("%d", &b_num);
 
     temp = create_node(new_no);
-    if (start->value == b_num)
+    if (head->value == b_num)
     {
-        temp->next = start;
-        start = temp;
+        temp->next = head;
+        head = temp;
         found = 1;
     }
     else
     {
-        current = start;
+        current = head;
         while (current->next != NULL)
         {
             if (current->next->value == b_num)
@@ -230,7 +230,7 @@ void insert_after()
 
     temp = create_node(new_no);
 
-    current = start;
+    current = head;
     while (current != NULL)
     {
         if (current->value == a_num)
@@ -293,8 +293,8 @@ void Insert()
 
 void delete_from_begin()
 {
-    NODE *temp = start;
-    start = start->next;
+    NODE *temp = head;
+    head = head->next;
 
     free(temp);
 }
@@ -302,7 +302,7 @@ void delete_from_begin()
 void delete_from_end()
 {
     NODE *current, *temp = NULL;
-    current = start;
+    current = head;
 
     while (current != NULL)
     {
@@ -325,7 +325,7 @@ void delete_from_middle()
     printf("\nEnter a no want to delete: ");
     scanf("%d", &no);
 
-    current = start;
+    current = head;
     while (current->next != NULL)
     {
         if (current->next->value == no)
@@ -358,7 +358,7 @@ void Delete()
 
         scanf("\n%d", &c);
 
-        if (start != NULL)
+        if (head != NULL)
         {
             switch (c)
             {
@@ -400,7 +400,7 @@ void Search()
     printf("\nEnter the value of data want to search: ");
     scanf("%d", &n);
 
-    current = start;
+    current = head;
     while (current != NULL)
     {
         if (current->value == n)
@@ -421,7 +421,7 @@ void Search()
 // void Reverse_list()
 // {
 //     NODE *current, *prev, *sprev;
-//     current = start;
+//     current = head;
 //     prev = sprev = NULL;
 
 //     while (current != NULL)
@@ -431,12 +431,12 @@ void Search()
 //         current = current->next;
 //         prev->next = sprev;
 //     }
-//     start = prev;
+//     head = prev;
 // }
 
 void Bubble_sort()
 {
-    NODE *current = start, *cur = NULL;
+    NODE *current = head, *cur = NULL;
     int t;
 
     while (current != NULL)
@@ -456,13 +456,13 @@ void Bubble_sort()
     }
 }
 
-void Print_reverse(NODE *start)
+void Print_reverse(NODE *head)
 {
-    if (start == NULL)
+    if (head == NULL)
     {
         return;
     }
-    Print_reverse(start->next);
-    printf("%d\t", start->value);
+    Print_reverse(head->next);
+    printf("%d\t", head->value);
     return;
 }
