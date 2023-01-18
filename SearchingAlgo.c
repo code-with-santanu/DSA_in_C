@@ -56,10 +56,12 @@ int BinarySearch(int arr[],int size,int targetNo)
         {
             return mid;
         }
+        // If no is larger, no is in upper part
         else if(arr[mid] < targetNo)
         {
             low=mid+1;
         }
+        //If no is smaller, no is in the lower part
         else
         {
             high =mid-1;
@@ -93,10 +95,12 @@ int InterpolationSearch(int arr[],int size, int targetNo)
         {
             return pos;
         }
+        // If no is larger, no is in upper part
         else if(arr[pos]<targetNo)
         {
             low = pos+1;
         }
+        //If no is smaller, no is in the lower part
         else
         {
             high = pos-1;
