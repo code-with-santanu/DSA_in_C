@@ -1,6 +1,29 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+void InsertInArray(int arr[],int size)
+{
+    int i,n;
+
+    for(i=0;i<size;i++)
+    {
+        printf("\nEnter a no: ");
+        scanf("%d",&n); 
+        arr[i]=n;   
+    }
+
+}
+
+void Print(int arr[],int size)
+{
+    int i;
+
+    printf("\nThe array: ");
+    for(i=0;i<size;i++)
+    {
+        printf("%d\t",arr[i]);
+    }
+}
 
 int LinearSearch(int arr[],int size,int targetNo)
 {
@@ -46,29 +69,44 @@ int BinarySearch(int arr[],int size,int targetNo)
     return -1;
 }
 
-void InsertInArray(int arr[],int size)
-{
-    int i,n;
 
-    for(i=0;i<size;i++)
+//Applicable for sorted array and data should be uniformly distributed
+int InterpolationSearch(int arr[],int size, int targetNo)
+{
+    int low,pos,high;
+    low=0;
+    high=size-1;
+
+    //for 1 ele present in array(to avoid zero devision error)
+    if(size==1)
     {
-        printf("\nEnter a no: ");
-        scanf("%d",&n); 
-        arr[i]=n;   
+        if(arr[0]==targetNo)
+            return 0;
+        else
+            return -1;
     }
 
-}
-
-void Print(int arr[],int size)
-{
-    int i;
-
-    printf("\nThe array: ");
-    for(i=0;i<size;i++)
+    while (low<=high)
     {
-        printf("%d\t",arr[i]);
+        pos = low + (((targetNo-arr[low]) / (arr[high]-arr[low])) * (high-low));
+        if(arr[pos]==targetNo)
+        {
+            return pos;
+        }
+        else if(arr[pos]<targetNo)
+        {
+            low = pos+1;
+        }
+        else
+        {
+            high = pos-1;
+        }
     }
+    
+    return -1;
 }
+
+
 
 int main()
 {
@@ -85,8 +123,10 @@ int main()
     scanf("%d",&targetNo);
 
 
-    // searchIndex=LinearSearch(a,size,targetNo);        
+    //choose any one algo and comment rest to algo before run the program
+    searchIndex=LinearSearch(a,size,targetNo);        
     searchIndex=BinarySearch(a,size,targetNo);
+    searchIndex=InterpolationSearch(a,size,targetNo);
 
     if(searchIndex==-1)
     {
